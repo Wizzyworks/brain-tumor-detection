@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: brain-tumor-detection
+  labels:
+    app: brain-tumor-detection
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: brain-tumor-detection
+  template:
+    metadata:
+      labels:
+        app: brain-tumor-detection
+    spec:
+      containers:
+      - name: brain-tumor-detection
+        image: brain-tumor-detection:v1
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8001
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8001
+          initialDelaySeconds: 5
+          periodSeconds: 5
