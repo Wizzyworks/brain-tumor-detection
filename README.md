@@ -32,6 +32,23 @@ Brain tumors are a serious health condition requiring early and accurate detecti
             ├── Brain Tumor/
             └── Healthy/
     ```
+---
+
+## 🧠 Key EDA insights: Why this Model?
+Our architectural choices are directly driven by the data analysis (see `notebook.ipynb`):
+![](Screenshots/eda_explicit.png)
+
+1.  **4 Convolutional Layers (16 → 128 filters)**
+    *   *Reasoning:* EDA showed tumors have complex, non-uniform textures. A shallow network detects edges, but we need depth to capture the "mass" and "boundary" features of a tumor.
+2.  **Adaptive Pooling (`AdaptiveAvgPool2d`)**
+    *   *Reasoning:* MRI machines produce scans of varying resolutions. This layer forces *any* input size into a fixed feature vector, making the model robust to different image dimensions without aggressive warping.
+3.  **Dropout (0.25)**
+    *   *Reasoning:* The dataset is relatively small (< 5000 images). Deep networks easily memorize small datasets. Dropout forces the network to learn robust features by randomly disabling neurons.
+4.  **LogSoftmax + NLLLoss**
+    *   *Reasoning:* We use this combination for numerical stability over standard Softmax, ensuring gradients don't vanish during training on medical imagery.
+
+---
+
 
 ---
 
@@ -77,23 +94,6 @@ python -m pip install --upgrade pip
 # 2. Install all the project tools
 pip install -r requirements.txt
 ```
-
----
-
-## 🧠 Architecture Logic: Why this Model?
-
-Our architectural choices are directly driven by the data analysis (see `notebook.ipynb`):
-
-1.  **4 Convolutional Layers (16 → 128 filters)**
-    *   *Reasoning:* EDA showed tumors have complex, non-uniform textures. A shallow network detects edges, but we need depth to capture the "mass" and "boundary" features of a tumor.
-2.  **Adaptive Pooling (`AdaptiveAvgPool2d`)**
-    *   *Reasoning:* MRI machines produce scans of varying resolutions. This layer forces *any* input size into a fixed feature vector, making the model robust to different image dimensions without aggressive warping.
-3.  **Dropout (0.25)**
-    *   *Reasoning:* The dataset is relatively small (< 5000 images). Deep networks easily memorize small datasets. Dropout forces the network to learn robust features by randomly disabling neurons.
-4.  **LogSoftmax + NLLLoss**
-    *   *Reasoning:* We use this combination for numerical stability over standard Softmax, ensuring gradients don't vanish during training on medical imagery.
-
----
 
 ## 🚀 Usage
 
@@ -153,3 +153,4 @@ We have set up a `NodePort` service which exposes the app specifically on port *
 | `app.py` | **Backend**: The code that handles API requests. |
 | `k8s/` | **Kubernetes**: Deployment and Service files. |
 | `requirements.txt` | **Libraries**: List of tools used. |
+
