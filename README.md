@@ -10,6 +10,7 @@
 Brain tumors are a serious health condition requiring early and accurate detection. Manual diagnosis from MRI scans is time-consuming and prone to human error.
 
 **This project offers a deep learning-based solution** to automatically detect and classify brain tumors from MRI images. By deploying this model as a responsive API, we enable medical professionals to get instant "second opinions" on scans.
+DEMO VIDEO:-[**click here**](https://youtube.com/shorts/UeULij4AynQ?feature=share) 
 
 ---
 
@@ -153,7 +154,10 @@ We have set up a `NodePort` service which exposes the app specifically on port *
 | `predict.py` | **Start Server**: The command to run the App. |
 | `train.py` | **Training**: Script to train the model. |
 | `app.py` | **Backend**: The code that handles API requests. |
+| `test_app.py` | **Backend**: Test the API response. |
+| `dockerfile` | **Docker**: Containerized docker application. |
 | `k8s/` | **Kubernetes**: Deployment and Service files. |
 | `requirements.txt` | **Libraries**: List of tools used. |
 
+## Deployed link : [**click here**](https://brain-tumor-detector-gqk8.onrender.com)
 
