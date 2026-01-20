@@ -36,7 +36,9 @@ Brain tumors are a serious health condition requiring early and accurate detecti
 
 ## 🧠 Key EDA insights: Why this Model?
 Our architectural choices are directly driven by the data analysis (see `notebook.ipynb`):
-![](Screenshots/eda_explicit.png)
+![](screenshots/eda1.png)
+![](screenshots/eda2.png)
+![](screenshots/eda3.png)
 
 1.  **4 Convolutional Layers (16 → 128 filters)**
     *   *Reasoning:* EDA showed tumors have complex, non-uniform textures. A shallow network detects edges, but we need depth to capture the "mass" and "boundary" features of a tumor.
@@ -153,4 +155,5 @@ We have set up a `NodePort` service which exposes the app specifically on port *
 | `app.py` | **Backend**: The code that handles API requests. |
 | `k8s/` | **Kubernetes**: Deployment and Service files. |
 | `requirements.txt` | **Libraries**: List of tools used. |
+
 
